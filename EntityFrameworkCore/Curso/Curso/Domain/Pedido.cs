@@ -11,7 +11,7 @@ namespace Curso.Domain
 
         public int ClienteId { get; set; }
 
-        public Cliente Cliente { get; set; }
+        public Cliente Cliente { get; set; } //propriedade de navegacao
 
         public DateTime IniciadoEm { get; set; }
 
