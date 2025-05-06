@@ -43,14 +43,23 @@ namespace Curso.Data
             {
                 p.ToTable("Pedido");
                 p.HasKey(p => p.Id);
-                p.Property(p => p.IniciadoEm).HasDefaultValue("GETDATE()").ValueGeneratedOnAdd();
+                p.Property(p => p.IniciadoEm).HasDefaultValue("GETDATE()").ValueGeneratedOnAdd(); //Por default irá salvar a data hora atual
                 p.Property(p => p.Status).HasConversion<string>();
                 p.Property(p => p.TipoFrete).HasConversion<int>();
                 p.Property(p => p.Observacao).HasColumnType("VARCHAR(512)");
 
-                p.HasMany(p => p.Itens)
+                p.HasMany(p => p.Itens) //Configura o relacionamento entre as tabelas muitos pra um 
                     .WithOne(p => p.Pedido)
                     .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<PedidoItem>(p =>
+            {
+                p.ToTable("PedidoItens");
+                p.HasKey(p => p.Id);
+                p.Property(p => p.Quantidade).HasDefaultValue().IsRequired(); //irá preencher auto quando nao informar
+                p.Property(p => p.Valor).IsRequired();
+                p.Property(p => p.Desconto).IsRequired();
             });
         }
     }

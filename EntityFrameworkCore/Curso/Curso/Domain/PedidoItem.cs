@@ -15,5 +15,7 @@
         public int Quantidade { get; set; }
 
         public decimal Desconto { get; set; }
+
+        public decimal Valor { get; set; }
     }
 }
